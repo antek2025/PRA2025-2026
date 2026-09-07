@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prijava | Infoeduka</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+
+<!--
+    Ulazni ekran aplikacije. Ovo je jedina stranica kojoj se pristupa bez prijave,
+    zato ovdje nema zaglavlja ni bočne navigacije.
+    Izgled prati prijavni ekran prave Infoeduke: bijela kartica na sivoj pozadini,
+    podcrtana polja bez okvira i gradijentni gumb.
+-->
+<main class="prijava-stranica">
+    <div class="prijava-okvir">
+
+        <div class="prijava-logo">
+            <span class="logo-znak">i</span>
+            <h1>Infoeduka</h1>
+            <p>Visoko učilište Algebra</p>
+        </div>
+
+        <!-- Poruka greške; skrivena je dok se nešto ne dogodi -->
+        <div id="porukaGreske" class="poruka poruka-greska skriveno"></div>
+
+        <!-- novalidate isključuje ugrađene poruke preglednika da poruke
+             budu na hrvatskom i da izgledaju jednako u cijeloj aplikaciji -->
+        <form id="formaPrijave" novalidate>
+            <div class="polje">
+                <label for="email">E-mail adresa</label>
+                <input type="email" id="email" name="email" autocomplete="username"
+                       placeholder="ime.prezime@algebra.hr" required>
+            </div>
+
+            <div class="polje">
+                <label for="lozinka">Lozinka</label>
+                <input type="password" id="lozinka" name="lozinka" autocomplete="current-password"
+                       placeholder="Lozinka" required>
+            </div>
+
+            <button type="submit" class="gumb gumb-primarni" id="gumbPrijava">Prijava</button>
+        </form>
+
+        <!-- Demo podaci - u pravoj aplikaciji ovoga naravno ne bi bilo,
+             ali olakšava pregled i obranu projekta -->
+        <div class="demo-podaci">
+            <strong>Demo pristup</strong><br>
+            Administrator: <code>admin@algebra.hr</code> / <code>admin123</code><br>
+            Predavač: <code>ivan.horvat@algebra.hr</code> / <code>predavac123</code>
+        </div>
+
+    </div>
+
+    <p class="prijava-podnozje">Infoeduka &middot; Projektni razvoj aplikacija</p>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/zajednicko.js"></script>
+<script src="js/prijava.js"></script>
+</body>
+</html>

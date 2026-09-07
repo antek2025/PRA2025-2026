@@ -1,0 +1,1126 @@
+/* ==========================================================================
+   Infoeduka - zajednički stilovi
+   --------------------------------------------------------------------------
+   Jedna datoteka za cijelu aplikaciju. Podijeljena je u sekcije redoslijedom
+   kojim se stvari i pojavljuju na ekranu: varijable i reset, pa raspored
+   stranice (zaglavlje, bočna traka, sadržaj, podnožje), pa komponente.
+
+   Izgled je rađen po uzoru na pravu Infoeduku (Algebrin studentski portal):
+   tamno zaglavlje, bijela bočna navigacija s ikonama, svijetlosiva pozadina,
+   bijele kartice bez rubova sa sjenom, plavi naslovi sekcija, narančasti
+   naslovi obavijesti i narančasto-ljubičasti gradijent na gumbima i podnožju.
+   Boje su CSS varijable u :root da se tema mijenja na jednom mjestu.
+   ========================================================================== */
+
+:root {
+    /* Boje po uzoru na Infoeduku */
+    --boja-zaglavlje: #1b1b1b;
+    --boja-pozadina: #f3f4f6;
+    --boja-povrsina: #ffffff;
+
+    --boja-plava: #1f6fd0;            /* naslovi sekcija, aktivna stavka izbornika */
+    --boja-plava-svijetla: #e9f1fc;
+    --boja-narancasta: #e8602c;       /* naslovi obavijesti */
+    --boja-narancasta-svijetla: #fdeee7;
+
+    /* Gradijent s gumba "Log In" i podnožja prave Infoeduke */
+    --gradijent: linear-gradient(90deg, #f28c28 0%, #e2306a 100%);
+    --boja-gradijent-pocetak: #f28c28;
+    --boja-gradijent-kraj: #e2306a;
+
+    --boja-tekst: #2b2b2b;
+    --boja-tekst-blijedi: #8a8a8a;
+    --boja-rub: #e6e6e6;
+
+    --boja-uspjeh: #2e9e5b;
+    --boja-uspjeh-svijetla: #e7f6ec;
+    --boja-upozorenje: #c47a00;
+    --boja-upozorenje-svijetla: #fff4e0;
+    --boja-greska: #d9342b;
+    --boja-greska-svijetla: #fdecea;
+
+    /* Razmaci i zaobljenja */
+    --razmak-s: 8px;
+    --razmak-m: 16px;
+    --razmak-l: 24px;
+    --radijus: 6px;
+    --sjena: 0 1px 4px rgba(0, 0, 0, 0.08);
+    --sjena-jaca: 0 4px 14px rgba(0, 0, 0, 0.12);
+
+    --sirina-bocne: 230px;
+    --visina-zaglavlja: 64px;
+}
+
+/* --- Reset ------------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--boja-tekst);
+    background-color: var(--boja-pozadina);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: var(--boja-plava);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 26px;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 19px;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Zaglavlje (tamna traka na vrhu)
+   ========================================================================== */
+
+.zaglavlje {
+    background-color: var(--boja-zaglavlje);
+    color: #ffffff;
+    height: var(--visina-zaglavlja);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+}
+
+.zaglavlje-sadrzaj {
+    height: 100%;
+    padding: 0 var(--razmak-l);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--razmak-m);
+}
+
+/* Logotip: mali gradijentni znak + tekst */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.logo:hover {
+    text-decoration: none;
+}
+
+.logo-znak {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    background: var(--gradijent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 800;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.logo-podnaslov {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b8b8b8;
+    line-height: 1;
+}
+
+.korisnik-blok {
+    display: flex;
+    align-items: center;
+    gap: var(--razmak-m);
+    font-size: 14px;
+}
+
+.korisnik-ime {
+    color: #ffffff;
+    font-weight: 500;
+    text-align: right;
+}
+
+.korisnik-uloga {
+    color: #a3a3a3;
+    font-size: 12px;
+    text-align: right;
+}
+
+.gumb-odjava {
+    background: transparent;
+    border: 1px solid #555;
+    color: #e6e6e6;
+    padding: 6px 14px;
+    border-radius: var(--radijus);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.gumb-odjava:hover {
+    background-color: #2e2e2e;
+    border-color: #777;
+}
+
+/* ==========================================================================
+   Raspored: bočna traka + sadržaj
+   ========================================================================== */
+
+.raspored {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    min-height: 0;
+}
+
+/* --- Bočna navigacija --------------------------------------------------- */
+
+.bocna-traka {
+    width: var(--sirina-bocne);
+    flex-shrink: 0;
+    background-color: var(--boja-povrsina);
+    box-shadow: var(--sjena);
+    padding: var(--razmak-m) 0;
+    position: sticky;
+    top: var(--visina-zaglavlja);
+    align-self: flex-start;
+    height: calc(100vh - var(--visina-zaglavlja));
+    overflow-y: auto;
+}
+
+.bocna-traka ul {
+    list-style: none;
+}
+
+.bocna-stavka {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px var(--razmak-l);
+    color: #555;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.bocna-stavka:hover {
+    background-color: #f7f8fa;
+    color: var(--boja-tekst);
+    text-decoration: none;
+}
+
+/* Klasu "aktivna" postavlja zajednicko.js prema trenutnoj stranici */
+.bocna-stavka.aktivna {
+    background-color: var(--boja-plava-svijetla);
+    color: var(--boja-plava);
+    border-left-color: var(--boja-plava);
+    font-weight: 500;
+}
+
+.bocna-stavka svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* --- Glavni sadržaj ------------------------------------------------------ */
+
+.sadrzaj {
+    flex: 1;
+    min-width: 0;
+    max-width: 1180px;
+    width: 100%;
+    padding: var(--razmak-l) 32px 40px;
+}
+
+.naslov-stranice {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--razmak-m);
+    margin-bottom: var(--razmak-l);
+    flex-wrap: wrap;
+}
+
+.naslov-stranice p {
+    color: var(--boja-tekst-blijedi);
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* Plavi naslov sekcije - kao "Raspored" / "Dolaznost" u Infoeduci */
+.naslov-sekcije {
+    color: var(--boja-plava);
+    font-size: 19px;
+    font-weight: 500;
+    margin: var(--razmak-l) 0 var(--razmak-m);
+}
+
+.naslov-sekcije:first-child {
+    margin-top: 0;
+}
+
+/* --- Podnožje (gradijentna traka) ---------------------------------------- */
+
+.podnozje {
+    background: var(--gradijent);
+    color: #ffffff;
+    font-size: 12px;
+    padding: 12px var(--razmak-l);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--razmak-m);
+    flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Kartice
+   ========================================================================== */
+
+.kartica {
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    box-shadow: var(--sjena);
+    padding: var(--razmak-l);
+    margin-bottom: var(--razmak-l);
+}
+
+.kartica-naslov {
+    margin-bottom: var(--razmak-m);
+}
+
+.kartica-naslov h2 {
+    color: var(--boja-plava);
+}
+
+/* Statistike na nadzornoj ploči */
+.mreza-statistika {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--razmak-m);
+    margin-bottom: var(--razmak-l);
+}
+
+.statistika {
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    box-shadow: var(--sjena);
+    padding: var(--razmak-m) var(--razmak-l);
+    text-align: center;
+}
+
+.statistika-broj {
+    font-size: 34px;
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--boja-plava);
+}
+
+.statistika-opis {
+    color: var(--boja-tekst-blijedi);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-top: 4px;
+}
+
+/* --- Kolegiji: vodoravni redci grupirani po godini i semestru ------------- */
+
+.grupa-kolegija {
+    margin-bottom: var(--razmak-l);
+}
+
+.red-kolegija {
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    box-shadow: var(--sjena);
+    padding: var(--razmak-m) var(--razmak-l);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--razmak-m);
+    transition: box-shadow 0.15s ease;
+}
+
+.red-kolegija:hover {
+    box-shadow: var(--sjena-jaca);
+}
+
+.red-kolegija.neaktivan {
+    opacity: 0.7;
+}
+
+/* Ikona mape kao u Infoeduci */
+.ikona-mape {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    color: #6b6b6b;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    margin-top: 2px;
+}
+
+.red-kolegija-tijelo {
+    flex: 1;
+    min-width: 0;
+}
+
+.red-kolegija-naziv {
+    font-size: 17px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--razmak-s);
+    flex-wrap: wrap;
+}
+
+.red-kolegija-meta {
+    color: var(--boja-tekst-blijedi);
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.red-kolegija-meta strong {
+    color: #555;
+    font-weight: 500;
+}
+
+.red-kolegija-opis {
+    color: #666;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.red-kolegija-akcije {
+    display: flex;
+    align-items: center;
+    gap: var(--razmak-s);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+/* --- Obavijesti: mreža kartica kao "Vijesti" u Infoeduci ------------------ */
+
+.mreza-obavijesti {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--razmak-m);
+}
+
+.kartica-obavijest {
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    box-shadow: var(--sjena);
+    padding: var(--razmak-l);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: box-shadow 0.15s ease;
+}
+
+.kartica-obavijest:hover {
+    box-shadow: var(--sjena-jaca);
+}
+
+.kartica-obavijest-vrh {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--razmak-s);
+    flex-wrap: wrap;
+}
+
+.kartica-obavijest-oznake {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    color: var(--boja-tekst-blijedi);
+    font-size: 12px;
+}
+
+.kartica-obavijest h3 {
+    color: var(--boja-narancasta);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.kartica-obavijest-tekst {
+    color: #555;
+    font-size: 14px;
+    flex: 1;
+    /* Ograničenje na 5 redaka da su sve kartice približno iste visine */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.kartica-obavijest-podnozje {
+    border-top: 1px solid var(--boja-rub);
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--razmak-s);
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--boja-tekst-blijedi);
+}
+
+.kartica-obavijest-podnozje strong {
+    color: #555;
+    font-weight: 500;
+}
+
+.kartica-obavijest-akcije {
+    display: flex;
+    gap: 6px;
+}
+
+/* ==========================================================================
+   Oznake (badge)
+   ========================================================================== */
+
+.oznaka {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.oznaka-primarna {
+    background-color: var(--boja-plava-svijetla);
+    color: var(--boja-plava);
+}
+
+.oznaka-narancasta {
+    background-color: var(--boja-narancasta-svijetla);
+    color: var(--boja-narancasta);
+}
+
+.oznaka-uspjeh {
+    background-color: var(--boja-uspjeh-svijetla);
+    color: var(--boja-uspjeh);
+}
+
+.oznaka-upozorenje {
+    background-color: var(--boja-upozorenje-svijetla);
+    color: var(--boja-upozorenje);
+}
+
+.oznaka-neutralna {
+    background-color: #efefef;
+    color: #777;
+}
+
+/* ==========================================================================
+   Gumbi
+   ========================================================================== */
+
+.gumb {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--radijus);
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.gumb:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Glavni gumb nosi gradijent kao "Log In" u Infoeduci */
+.gumb-primarni {
+    background: var(--gradijent);
+    color: #ffffff;
+}
+
+.gumb-primarni:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.gumb-sporedni {
+    background-color: var(--boja-povrsina);
+    color: var(--boja-tekst);
+    border-color: #d5d5d5;
+}
+
+.gumb-sporedni:hover:not(:disabled) {
+    background-color: #f3f3f3;
+}
+
+.gumb-opasni {
+    background-color: var(--boja-povrsina);
+    color: var(--boja-greska);
+    border-color: #f0c4c1;
+}
+
+.gumb-opasni:hover:not(:disabled) {
+    background-color: var(--boja-greska-svijetla);
+}
+
+.gumb-mali {
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   Tablice
+   ========================================================================== */
+
+.tablica-omot {
+    overflow-x: auto;
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    box-shadow: var(--sjena);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+thead th {
+    text-align: left;
+    padding: 12px var(--razmak-m);
+    border-bottom: 1px solid var(--boja-rub);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--boja-tekst-blijedi);
+    white-space: nowrap;
+}
+
+tbody td {
+    padding: 12px var(--razmak-m);
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #fafbfc;
+}
+
+td.akcije {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+}
+
+/* ==========================================================================
+   Forme
+   ========================================================================== */
+
+.polje {
+    margin-bottom: var(--razmak-m);
+}
+
+.polje label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+}
+
+.polje input[type="text"],
+.polje input[type="email"],
+.polje input[type="password"],
+.polje input[type="number"],
+.polje input[type="date"],
+.polje select,
+.polje textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: var(--radijus);
+    font-family: inherit;
+    font-size: 14px;
+    background-color: var(--boja-povrsina);
+    color: var(--boja-tekst);
+}
+
+.polje textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.polje input:focus,
+.polje select:focus,
+.polje textarea:focus {
+    outline: none;
+    border-color: var(--boja-plava);
+    box-shadow: 0 0 0 3px var(--boja-plava-svijetla);
+}
+
+.polje input.neispravno,
+.polje select.neispravno,
+.polje textarea.neispravno {
+    border-color: var(--boja-greska);
+}
+
+.polje .greska-polja {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--boja-greska);
+}
+
+.polje .pomoc {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--boja-tekst-blijedi);
+}
+
+.red-polja {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--razmak-m);
+}
+
+.potvrdni-okvir {
+    display: flex;
+    align-items: center;
+    gap: var(--razmak-s);
+}
+
+.potvrdni-okvir input {
+    width: 16px;
+    height: 16px;
+}
+
+.potvrdni-okvir label {
+    margin: 0;
+    font-weight: 400;
+    color: var(--boja-tekst);
+}
+
+.popis-izbora {
+    max-height: 160px;
+    overflow-y: auto;
+    border: 1px solid #d9d9d9;
+    border-radius: var(--radijus);
+    padding: var(--razmak-s);
+}
+
+.popis-izbora .stavka {
+    display: flex;
+    align-items: center;
+    gap: var(--razmak-s);
+    padding: 4px 2px;
+}
+
+.popis-izbora .stavka label {
+    margin: 0;
+    font-weight: 400;
+    color: var(--boja-tekst);
+    cursor: pointer;
+}
+
+/* --- Traka filtera --------------------------------------------------------- */
+
+.traka-filtera {
+    display: flex;
+    gap: var(--razmak-m);
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: var(--razmak-m);
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    box-shadow: var(--sjena);
+    padding: var(--razmak-m) var(--razmak-l);
+}
+
+.traka-filtera .polje {
+    margin-bottom: 0;
+    flex: 1 1 170px;
+    min-width: 150px;
+}
+
+/* Filteri u Infoeduci su samo podcrtani, bez okvira */
+.traka-filtera .polje input,
+.traka-filtera .polje select {
+    border: none;
+    border-bottom: 1px solid #cfcfcf;
+    border-radius: 0;
+    padding: 7px 2px;
+    background: transparent;
+}
+
+.traka-filtera .polje input:focus,
+.traka-filtera .polje select:focus {
+    box-shadow: none;
+    border-bottom-color: var(--boja-plava);
+}
+
+.broj-rezultata {
+    color: var(--boja-tekst-blijedi);
+    font-size: 13px;
+    margin-bottom: var(--razmak-m);
+}
+
+/* ==========================================================================
+   Poruke
+   ========================================================================== */
+
+.poruka {
+    padding: 10px var(--razmak-m);
+    border-radius: var(--radijus);
+    font-size: 14px;
+    margin-bottom: var(--razmak-m);
+    border: 1px solid transparent;
+}
+
+.poruka-greska {
+    background-color: var(--boja-greska-svijetla);
+    border-color: #f0c4c1;
+    color: var(--boja-greska);
+}
+
+.poruka-uspjeh {
+    background-color: var(--boja-uspjeh-svijetla);
+    border-color: #bfe0cd;
+    color: var(--boja-uspjeh);
+}
+
+.poruka-info {
+    background-color: var(--boja-plava-svijetla);
+    border-color: #cfe0f3;
+    color: var(--boja-plava);
+}
+
+.skriveno {
+    display: none !important;
+}
+
+.prazno {
+    text-align: center;
+    padding: 40px var(--razmak-m);
+    color: var(--boja-tekst-blijedi);
+}
+
+.prazno strong {
+    display: block;
+    color: var(--boja-tekst);
+    margin-bottom: 4px;
+}
+
+.obavijest-toast {
+    position: fixed;
+    right: var(--razmak-l);
+    bottom: 56px;
+    z-index: 60;
+    min-width: 240px;
+    max-width: 360px;
+    padding: 12px var(--razmak-m);
+    border-radius: var(--radijus);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.obavijest-toast.uspjeh {
+    background-color: var(--boja-uspjeh);
+}
+
+.obavijest-toast.greska {
+    background-color: var(--boja-greska);
+}
+
+/* ==========================================================================
+   Modalni prozor
+   ========================================================================== */
+
+.modal-pozadina {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: var(--razmak-l) var(--razmak-m);
+    overflow-y: auto;
+    z-index: 50;
+}
+
+.modal {
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    margin: auto 0;
+}
+
+.modal-zaglavlje {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--razmak-m) var(--razmak-l);
+    border-bottom: 1px solid var(--boja-rub);
+}
+
+.modal-zaglavlje h2 {
+    color: var(--boja-plava);
+}
+
+.modal-zatvori {
+    background: none;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--boja-tekst-blijedi);
+    padding: 0 4px;
+}
+
+.modal-zatvori:hover {
+    color: var(--boja-tekst);
+}
+
+.modal-tijelo {
+    padding: var(--razmak-l);
+}
+
+.modal-podnozje {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--razmak-s);
+    padding: var(--razmak-m) var(--razmak-l);
+    border-top: 1px solid var(--boja-rub);
+    background-color: #fafafa;
+    border-radius: 0 0 var(--radijus) var(--radijus);
+}
+
+/* ==========================================================================
+   Ekran za prijavu
+   ========================================================================== */
+
+.prijava-stranica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: var(--razmak-l) var(--razmak-m);
+}
+
+.prijava-okvir {
+    background-color: var(--boja-povrsina);
+    border-radius: var(--radijus);
+    box-shadow: var(--sjena-jaca);
+    padding: 40px 36px 28px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.prijava-logo {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.prijava-logo .logo-znak {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    font-size: 30px;
+    margin: 0 auto 12px;
+}
+
+.prijava-logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--boja-tekst);
+}
+
+.prijava-logo p {
+    color: var(--boja-tekst-blijedi);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* Podcrtana polja bez okvira - kao Username / Password u Infoeduci */
+.prijava-okvir .polje input {
+    border: none;
+    border-bottom: 1px solid #cfcfcf;
+    border-radius: 0;
+    padding: 8px 0;
+    font-size: 15px;
+}
+
+.prijava-okvir .polje input:focus {
+    box-shadow: none;
+    border-bottom-color: var(--boja-plava);
+}
+
+.prijava-okvir .polje label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+.prijava-okvir .gumb {
+    width: 100%;
+    margin-top: var(--razmak-m);
+    padding: 12px;
+    font-size: 15px;
+}
+
+.prijava-podnozje {
+    margin-top: var(--razmak-m);
+    color: var(--boja-tekst-blijedi);
+    font-size: 12px;
+}
+
+.demo-podaci {
+    margin-top: var(--razmak-l);
+    padding-top: var(--razmak-m);
+    border-top: 1px solid var(--boja-rub);
+    font-size: 12px;
+    color: var(--boja-tekst-blijedi);
+}
+
+.demo-podaci code {
+    background-color: #f2f2f2;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* ==========================================================================
+   Prilagodba manjim ekranima
+   ========================================================================== */
+
+@media (max-width: 900px) {
+    /* Bočna traka postaje vodoravna traka ispod zaglavlja */
+    .raspored {
+        flex-direction: column;
+    }
+
+    .bocna-traka {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    .bocna-traka ul {
+        display: flex;
+    }
+
+    .bocna-stavka {
+        padding: 10px 14px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+    }
+
+    .bocna-stavka.aktivna {
+        border-bottom-color: var(--boja-plava);
+    }
+
+    .sadrzaj {
+        padding: var(--razmak-m);
+    }
+
+    .korisnik-uloga {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .naslov-stranice {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .red-polja {
+        grid-template-columns: 1fr;
+    }
+
+    .mreza-obavijesti {
+        grid-template-columns: 1fr;
+    }
+
+    .red-kolegija {
+        flex-wrap: wrap;
+    }
+
+    .red-kolegija-akcije {
+        width: 100%;
+        justify-content: flex-start;
+        padding-top: var(--razmak-s);
+        border-top: 1px solid var(--boja-rub);
+    }
+
+    .obavijest-toast {
+        left: var(--razmak-m);
+        right: var(--razmak-m);
+        max-width: none;
+    }
+
+    .podnozje {
+        justify-content: center;
+        text-align: center;
+    }
+}

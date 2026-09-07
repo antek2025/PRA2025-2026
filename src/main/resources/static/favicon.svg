@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <!--
+        Ikona kartice preglednika. Slovo "I" od Infoeduka na "Algebra" crvenoj
+        podlozi - ista boja kao --boja-primarna u css/stil.css.
+
+        SVG umjesto .ico jer je tekstualna datoteka (vidi se u gitu),
+        ostra je na svakoj velicini i podrzavaju je svi moderni preglednici.
+    -->
+    <rect width="32" height="32" rx="7" fill="#a5142c"/>
+    <path d="M11 8h10v3.4h-3.1v9.2H21V24H11v-3.4h3.1v-9.2H11z" fill="#ffffff"/>
+</svg>

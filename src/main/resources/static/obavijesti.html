@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obavijesti | Infoeduka</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+
+<div id="zaglavlje"></div>
+
+<div class="raspored">
+<nav class="bocna-traka" id="bocnaTraka" aria-label="Glavna navigacija"></nav>
+
+<main class="sadrzaj">
+
+    <div class="naslov-stranice">
+        <div>
+            <h1>Obavijesti</h1>
+            <p id="podnaslov">Obavijesti vezane uz kolegije</p>
+        </div>
+        <!-- Obavijest smiju dodati i administrator i predavač, razlika je samo
+             u tome na kojim kolegijima - zato je gumb uvijek vidljiv -->
+        <button type="button" class="gumb gumb-primarni" id="gumbNova">+ Nova obavijest</button>
+    </div>
+
+    <div id="porukaGreske" class="poruka poruka-greska skriveno"></div>
+
+    <div class="traka-filtera">
+        <div class="polje">
+            <label for="pretraga">Pretraga</label>
+            <input type="text" id="pretraga" placeholder="Naslov ili sadržaj obavijesti">
+        </div>
+        <div class="polje">
+            <label for="filterKatedra">Katedra</label>
+            <select id="filterKatedra">
+                <option value="">Sve katedre</option>
+            </select>
+        </div>
+        <div class="polje">
+            <label for="filterGodina">Godina studija</label>
+            <select id="filterGodina">
+                <option value="">Sve godine</option>
+                <option value="1">1. godina</option>
+                <option value="2">2. godina</option>
+                <option value="3">3. godina</option>
+            </select>
+        </div>
+        <!-- Popis kolegija se sužava prema odabranoj katedri i godini (vidi obavijesti.js) -->
+        <div class="polje">
+            <label for="filterKolegij">Kolegij</label>
+            <select id="filterKolegij">
+                <option value="">Svi kolegiji</option>
+            </select>
+        </div>
+        <div class="polje">
+            <label for="filterStatus">Status</label>
+            <select id="filterStatus">
+                <option value="">Sve obavijesti</option>
+                <option value="aktivna">Trenutno vrijede</option>
+                <option value="istekla">Istekle</option>
+                <option value="buduca">Buduće</option>
+            </select>
+        </div>
+    </div>
+
+    <p class="broj-rezultata" id="brojRezultata"></p>
+
+    <div id="popisObavijesti"></div>
+
+</main>
+</div>
+
+<footer class="podnozje">
+    <span>Infoeduka &middot; Projektni razvoj aplikacija</span>
+    <span>Visoko učilište Algebra</span>
+</footer>
+
+<!-- Modal za unos i uređivanje obavijesti -->
+<div class="modal-pozadina skriveno" id="modalObavijest">
+    <div class="modal">
+        <div class="modal-zaglavlje">
+            <h2 id="naslovModala">Nova obavijest</h2>
+            <button type="button" class="modal-zatvori" id="gumbZatvori">&times;</button>
+        </div>
+
+        <form id="formaObavijesti" novalidate>
+            <div class="modal-tijelo">
+
+                <div id="greskaForme" class="poruka poruka-greska skriveno"></div>
+                <input type="hidden" id="obavijestId">
+
+                <div class="polje">
+                    <label for="kolegijId">Kolegij *</label>
+                    <select id="kolegijId" name="kolegijId"></select>
+                    <span class="pomoc" id="pomocKolegij">Obavijest je uvijek vezana uz jedan kolegij.</span>
+                </div>
+
+                <div class="polje">
+                    <label for="naslov">Naslov *</label>
+                    <input type="text" id="naslov" name="naslov" maxlength="150"
+                           placeholder="npr. Rok za predaju seminarskog rada">
+                </div>
+
+                <div class="polje">
+                    <label for="opis">Sadržaj obavijesti *</label>
+                    <textarea id="opis" name="opis" maxlength="2000"
+                              placeholder="Detaljan tekst obavijesti"></textarea>
+                </div>
+
+                <div class="red-polja">
+                    <div class="polje">
+                        <label for="datumObjave">Datum objave *</label>
+                        <input type="date" id="datumObjave" name="datumObjave">
+                    </div>
+                    <div class="polje">
+                        <label for="datumIsteka">Datum isteka *</label>
+                        <input type="date" id="datumIsteka" name="datumIsteka">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-podnozje">
+                <button type="button" class="gumb gumb-sporedni" id="gumbOdustani">Odustani</button>
+                <button type="submit" class="gumb gumb-primarni" id="gumbSpremi">Spremi</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/zajednicko.js"></script>
+<script src="js/obavijesti.js"></script>
+</body>
+</html>

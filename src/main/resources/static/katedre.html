@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katedre | Infoeduka</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+
+<div id="zaglavlje"></div>
+
+<div class="raspored">
+<nav class="bocna-traka" id="bocnaTraka" aria-label="Glavna navigacija"></nav>
+
+<main class="sadrzaj">
+
+    <div class="naslov-stranice">
+        <div>
+            <h1>Katedre</h1>
+            <p>Ustrojstvene jedinice pod koje spadaju kolegiji</p>
+        </div>
+        <button type="button" class="gumb gumb-primarni" id="gumbNova">+ Nova katedra</button>
+    </div>
+
+    <div id="porukaGreske" class="poruka poruka-greska skriveno"></div>
+
+    <div id="popisKatedri"></div>
+
+</main>
+</div>
+
+<footer class="podnozje">
+    <span>Infoeduka &middot; Projektni razvoj aplikacija</span>
+    <span>Visoko učilište Algebra</span>
+</footer>
+
+<!-- Modal za unos i uređivanje katedre -->
+<div class="modal-pozadina skriveno" id="modalKatedra">
+    <div class="modal">
+        <div class="modal-zaglavlje">
+            <h2 id="naslovModala">Nova katedra</h2>
+            <button type="button" class="modal-zatvori" id="gumbZatvori">&times;</button>
+        </div>
+
+        <form id="formaKatedre" novalidate>
+            <div class="modal-tijelo">
+
+                <div id="greskaForme" class="poruka poruka-greska skriveno"></div>
+                <input type="hidden" id="katedraId">
+
+                <div class="polje">
+                    <label for="kratica">Kratica *</label>
+                    <input type="text" id="kratica" name="kratica" maxlength="10" placeholder="npr. PI">
+                    <span class="pomoc">Kratka oznaka, mora biti jedinstvena. Sprema se velikim slovima.</span>
+                </div>
+
+                <div class="polje">
+                    <label for="naziv">Naziv katedre *</label>
+                    <input type="text" id="naziv" name="naziv" maxlength="100"
+                           placeholder="npr. Programsko inženjerstvo">
+                </div>
+
+                <div class="polje">
+                    <label for="opis">Opis</label>
+                    <textarea id="opis" name="opis" maxlength="500"
+                              placeholder="Čime se katedra bavi"></textarea>
+                </div>
+
+            </div>
+
+            <div class="modal-podnozje">
+                <button type="button" class="gumb gumb-sporedni" id="gumbOdustani">Odustani</button>
+                <button type="submit" class="gumb gumb-primarni" id="gumbSpremi">Spremi</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/zajednicko.js"></script>
+<script src="js/katedre.js"></script>
+</body>
+</html>

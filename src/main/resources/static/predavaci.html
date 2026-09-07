@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predavači | Infoeduka</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+
+<div id="zaglavlje"></div>
+
+<div class="raspored">
+<nav class="bocna-traka" id="bocnaTraka" aria-label="Glavna navigacija"></nav>
+
+<main class="sadrzaj">
+
+    <div class="naslov-stranice">
+        <div>
+            <h1>Korisnici</h1>
+            <p>Predavači i administratori sustava</p>
+        </div>
+        <button type="button" class="gumb gumb-primarni" id="gumbNovi">+ Novi korisnik</button>
+    </div>
+
+    <div id="porukaGreske" class="poruka poruka-greska skriveno"></div>
+
+    <div class="traka-filtera">
+        <div class="polje">
+            <label for="pretraga">Pretraga</label>
+            <input type="text" id="pretraga" placeholder="Ime, prezime ili e-mail">
+        </div>
+        <div class="polje">
+            <label for="filterUloga">Uloga</label>
+            <select id="filterUloga">
+                <option value="">Sve uloge</option>
+                <option value="ADMIN">Administratori</option>
+                <option value="PREDAVAC">Predavači</option>
+            </select>
+        </div>
+        <div class="polje">
+            <label for="filterStatus">Status</label>
+            <select id="filterStatus">
+                <option value="">Svi</option>
+                <option value="aktivan">Samo aktivni</option>
+                <option value="neaktivan">Samo neaktivni</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="popisKorisnika"></div>
+
+</main>
+</div>
+
+<footer class="podnozje">
+    <span>Infoeduka &middot; Projektni razvoj aplikacija</span>
+    <span>Visoko učilište Algebra</span>
+</footer>
+
+<!-- Modal za unos i uređivanje korisnika -->
+<div class="modal-pozadina skriveno" id="modalKorisnik">
+    <div class="modal">
+        <div class="modal-zaglavlje">
+            <h2 id="naslovModala">Novi korisnik</h2>
+            <button type="button" class="modal-zatvori" id="gumbZatvori">&times;</button>
+        </div>
+
+        <form id="formaKorisnika" novalidate>
+            <div class="modal-tijelo">
+
+                <div id="greskaForme" class="poruka poruka-greska skriveno"></div>
+                <input type="hidden" id="korisnikId">
+
+                <div class="red-polja">
+                    <div class="polje">
+                        <label for="ime">Ime *</label>
+                        <input type="text" id="ime" name="ime" maxlength="50">
+                    </div>
+                    <div class="polje">
+                        <label for="prezime">Prezime *</label>
+                        <input type="text" id="prezime" name="prezime" maxlength="50">
+                    </div>
+                </div>
+
+                <div class="polje">
+                    <label for="email">E-mail adresa *</label>
+                    <input type="email" id="email" name="email" maxlength="120"
+                           placeholder="ime.prezime@algebra.hr">
+                    <span class="pomoc">Služi i kao korisničko ime kod prijave.</span>
+                </div>
+
+                <div class="polje">
+                    <label for="lozinka">Lozinka <span id="oznakaLozinke">*</span></label>
+                    <input type="password" id="lozinka" name="lozinka" autocomplete="new-password">
+                    <span class="pomoc" id="pomocLozinke">Najmanje 6 znakova.</span>
+                </div>
+
+                <div class="polje">
+                    <label for="uloga">Uloga *</label>
+                    <select id="uloga" name="uloga">
+                        <option value="PREDAVAC">Predavač</option>
+                        <option value="ADMIN">Administrator</option>
+                    </select>
+                    <span class="pomoc">Administrator vidi i uređuje sve, predavač samo svoje kolegije.</span>
+                </div>
+
+                <div class="polje potvrdni-okvir">
+                    <input type="checkbox" id="aktivan" name="aktivan" checked>
+                    <label for="aktivan">Korisnik se može prijaviti u sustav</label>
+                </div>
+
+            </div>
+
+            <div class="modal-podnozje">
+                <button type="button" class="gumb gumb-sporedni" id="gumbOdustani">Odustani</button>
+                <button type="submit" class="gumb gumb-primarni" id="gumbSpremi">Spremi</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/zajednicko.js"></script>
+<script src="js/predavaci.js"></script>
+</body>
+</html>

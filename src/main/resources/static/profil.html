@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moj profil | Infoeduka</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+
+<div id="zaglavlje"></div>
+
+<div class="raspored">
+<nav class="bocna-traka" id="bocnaTraka" aria-label="Glavna navigacija"></nav>
+
+<main class="sadrzaj">
+
+    <div class="naslov-stranice">
+        <div>
+            <h1>Moj profil</h1>
+            <p>Vaši podaci i promjena lozinke</p>
+        </div>
+    </div>
+
+    <div class="kartica">
+        <div class="kartica-naslov">
+            <h2>Podaci o korisniku</h2>
+        </div>
+        <div class="tablica-omot" style="border:none;box-shadow:none">
+            <table>
+                <tbody>
+                    <tr><th style="width:200px">Ime i prezime</th><td id="prikazImePrezime">-</td></tr>
+                    <tr><th>E-mail adresa</th><td id="prikazEmail">-</td></tr>
+                    <tr><th>Uloga</th><td id="prikazUloga">-</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="pomoc" style="margin-top:12px">
+            Izmjenu imena, e-maila ili uloge radi administrator na stranici Korisnici.
+        </p>
+    </div>
+
+    <div class="kartica" style="max-width:560px">
+        <div class="kartica-naslov">
+            <h2>Promjena lozinke</h2>
+        </div>
+
+        <div id="greskaForme" class="poruka poruka-greska skriveno"></div>
+        <div id="porukaUspjeha" class="poruka poruka-uspjeh skriveno"></div>
+
+        <form id="formaLozinke" novalidate>
+            <div class="polje">
+                <label for="staraLozinka">Trenutna lozinka *</label>
+                <input type="password" id="staraLozinka" name="staraLozinka"
+                       autocomplete="current-password">
+            </div>
+
+            <div class="polje">
+                <label for="novaLozinka">Nova lozinka *</label>
+                <input type="password" id="novaLozinka" name="novaLozinka"
+                       autocomplete="new-password">
+                <span class="pomoc">Najmanje 6 znakova.</span>
+            </div>
+
+            <div class="polje">
+                <label for="potvrdaLozinke">Ponovite novu lozinku *</label>
+                <input type="password" id="potvrdaLozinke" autocomplete="new-password">
+            </div>
+
+            <button type="submit" class="gumb gumb-primarni" id="gumbSpremi">Promijeni lozinku</button>
+        </form>
+    </div>
+
+</main>
+</div>
+
+<footer class="podnozje">
+    <span>Infoeduka &middot; Projektni razvoj aplikacija</span>
+    <span>Visoko učilište Algebra</span>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/zajednicko.js"></script>
+<script src="js/profil.js"></script>
+</body>
+</html>

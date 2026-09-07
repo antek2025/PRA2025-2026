@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nadzorna ploča | Infoeduka</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+
+<!-- Zaglavlje s izbornikom crta zajednicko.js nakon što provjeri prijavu -->
+<div id="zaglavlje"></div>
+
+<div class="raspored">
+<nav class="bocna-traka" id="bocnaTraka" aria-label="Glavna navigacija"></nav>
+
+<main class="sadrzaj">
+
+    <div class="naslov-stranice">
+        <div>
+            <h1>Nadzorna ploča</h1>
+            <p id="pozdrav">Učitavanje...</p>
+        </div>
+    </div>
+
+    <div id="porukaGreske" class="poruka poruka-greska skriveno"></div>
+
+    <!-- Brojevi se popunjavaju iz nadzorna-ploca.js -->
+    <div class="mreza-statistika" id="statistike"></div>
+
+    <div class="kartica">
+        <div class="kartica-naslov">
+            <h2>Aktualne obavijesti</h2>
+        </div>
+        <div id="popisObavijesti">
+            <p class="prazno">Učitavanje...</p>
+        </div>
+    </div>
+
+    <div class="kartica">
+        <div class="kartica-naslov">
+            <h2 id="naslovKolegija">Kolegiji</h2>
+        </div>
+        <div id="popisKolegija">
+            <p class="prazno">Učitavanje...</p>
+        </div>
+    </div>
+
+</main>
+</div>
+
+<footer class="podnozje">
+    <span>Infoeduka &middot; Projektni razvoj aplikacija</span>
+    <span>Visoko učilište Algebra</span>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/zajednicko.js"></script>
+<script src="js/nadzorna-ploca.js"></script>
+</body>
+</html>

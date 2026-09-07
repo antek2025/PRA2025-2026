@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolegiji | Infoeduka</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+
+<div id="zaglavlje"></div>
+
+<div class="raspored">
+<nav class="bocna-traka" id="bocnaTraka" aria-label="Glavna navigacija"></nav>
+
+<main class="sadrzaj">
+
+    <div class="naslov-stranice">
+        <div>
+            <h1 id="naslov">Kolegiji</h1>
+            <p id="podnaslov">Pregled kolegija i dodijeljenih predavača</p>
+        </div>
+        <!-- Gumb za dodavanje vidi samo administrator; otkriva ga kolegiji.js -->
+        <button type="button" class="gumb gumb-primarni skriveno" id="gumbNovi">+ Novi kolegij</button>
+    </div>
+
+    <div id="porukaGreske" class="poruka poruka-greska skriveno"></div>
+
+    <!-- Filtriranje se radi na klijentu jer je popis kolegija malen
+         (par desetaka zapisa) pa nema potrebe za novim pozivom na poslužitelj -->
+    <div class="traka-filtera">
+        <div class="polje">
+            <label for="pretraga">Pretraga</label>
+            <input type="text" id="pretraga" placeholder="Naziv ili šifra kolegija">
+        </div>
+        <div class="polje">
+            <label for="filterKatedra">Katedra</label>
+            <select id="filterKatedra">
+                <option value="">Sve katedre</option>
+            </select>
+        </div>
+        <div class="polje">
+            <label for="filterGodina">Godina studija</label>
+            <select id="filterGodina">
+                <option value="">Sve godine</option>
+                <option value="1">1. godina</option>
+                <option value="2">2. godina</option>
+                <option value="3">3. godina</option>
+            </select>
+        </div>
+        <!-- Popis semestara se sužava kad se odabere godina studija (vidi kolegiji.js) -->
+        <div class="polje">
+            <label for="filterSemestar">Semestar</label>
+            <select id="filterSemestar">
+                <option value="">Svi semestri</option>
+            </select>
+        </div>
+        <div class="polje">
+            <label for="filterStatus">Status</label>
+            <select id="filterStatus">
+                <option value="">Svi</option>
+                <option value="aktivan">Samo aktivni</option>
+                <option value="neaktivan">Samo neaktivni</option>
+            </select>
+        </div>
+    </div>
+
+    <p class="broj-rezultata" id="brojRezultata"></p>
+
+    <div id="popisKolegija"></div>
+
+</main>
+</div>
+
+<footer class="podnozje">
+    <span>Infoeduka &middot; Projektni razvoj aplikacija</span>
+    <span>Visoko učilište Algebra</span>
+</footer>
+
+<!-- ======================================================================
+     Modalni prozor za unos i uređivanje kolegija.
+     Ista forma služi i za novi i za postojeći kolegij - razlika je samo u
+     tome je li popunjeno skriveno polje s ID-em.
+     ====================================================================== -->
+<div class="modal-pozadina skriveno" id="modalKolegij">
+    <div class="modal">
+        <div class="modal-zaglavlje">
+            <h2 id="naslovModala">Novi kolegij</h2>
+            <button type="button" class="modal-zatvori" id="gumbZatvori">&times;</button>
+        </div>
+
+        <form id="formaKolegija" novalidate>
+            <div class="modal-tijelo">
+
+                <div id="greskaForme" class="poruka poruka-greska skriveno"></div>
+                <input type="hidden" id="kolegijId">
+
+                <div class="red-polja">
+                    <div class="polje">
+                        <label for="sifra">Šifra *</label>
+                        <input type="text" id="sifra" name="sifra" maxlength="20" placeholder="npr. PRA">
+                        <span class="pomoc">Kratka oznaka, mora biti jedinstvena.</span>
+                    </div>
+                    <div class="polje">
+                        <label for="semestar">Semestar *</label>
+                        <select id="semestar" name="semestar">
+                            <option value="1">1. semestar</option>
+                            <option value="2">2. semestar</option>
+                            <option value="3">3. semestar</option>
+                            <option value="4">4. semestar</option>
+                            <option value="5">5. semestar</option>
+                            <option value="6">6. semestar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="polje">
+                    <label for="naziv">Naziv kolegija *</label>
+                    <input type="text" id="naziv" name="naziv" maxlength="120"
+                           placeholder="npr. Projektni razvoj aplikacija">
+                </div>
+
+                <div class="polje">
+                    <label for="opis">Opis</label>
+                    <textarea id="opis" name="opis" maxlength="1000"
+                              placeholder="Kratki opis sadržaja kolegija"></textarea>
+                </div>
+
+                <div class="polje">
+                    <label for="ects">ECTS bodovi *</label>
+                    <input type="number" id="ects" name="ects" min="1" max="30" value="5">
+                </div>
+
+                <div class="polje">
+                    <label for="katedraId">Katedra</label>
+                    <select id="katedraId" name="katedraId">
+                        <option value="">— bez katedre —</option>
+                    </select>
+                    <span class="pomoc">Ustrojstvena jedinica pod koju kolegij spada.</span>
+                </div>
+
+                <div class="polje">
+                    <label>Predavači</label>
+                    <div class="popis-izbora" id="popisPredavaca"></div>
+                    <span class="pomoc">Odaberite predavače koji izvode ovaj kolegij.</span>
+                </div>
+
+                <div class="polje potvrdni-okvir">
+                    <input type="checkbox" id="aktivan" name="aktivan" checked>
+                    <label for="aktivan">Kolegij je aktivan (izvodi se)</label>
+                </div>
+
+            </div>
+
+            <div class="modal-podnozje">
+                <button type="button" class="gumb gumb-sporedni" id="gumbOdustani">Odustani</button>
+                <button type="submit" class="gumb gumb-primarni" id="gumbSpremi">Spremi</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/zajednicko.js"></script>
+<script src="js/kolegiji.js"></script>
+</body>
+</html>
